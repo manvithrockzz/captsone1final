@@ -87,9 +87,6 @@ const replayButton = document.querySelector(".replay");
 
 const button = document.getElementById("playagain");
 
-
-
-
 const scoreNumber = document.querySelector(".score__number");
 const pcNumber = document.querySelector(".computerscore__number");
 let score = 0;
@@ -107,9 +104,6 @@ let scores = 0;
 //   replayButton.textContent = "Replay";
 //   replayButton.style.display = 'block';
 // }
-
-
-
 
 function displayWinner(results) {
   setTimeout(() => {
@@ -131,7 +125,7 @@ function displayWinner(results) {
       //   "<br> <em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AGAINST PC </em>";
       resultDivs[1].classList.toggle("winner");
       keepScores(1);
-      if (scores ===15) {
+      if (scores === 15) {
         stopGame();
       }
 
@@ -143,6 +137,8 @@ function displayWinner(results) {
     resultsDiv.classList.toggle("show-winner");
   }, 1000);
 }
+
+const replayButtn = document.querySelector(".replay"); // replace "replay-button" with the ID of your replay button
 
 function stopGame() {
   // Disable the choice buttons
@@ -166,27 +162,21 @@ function stopGame() {
     resultText.innerHTML +=
       "<br> <em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AGAINST PC </em>";
     resultDivs[1].classList.toggle("winner");
-  } else if(score === scores) {
+  } else if (score === scores) {
     resultText.innerHTML += "Tie UP";
-    playAgainBtn.style.display="none";
-    replayButton.style.display="block";
-
-
+    playAgainBtn.style.display = "none";
+    replayButton.style.display = "block";
   }
 }
 
-const replayButtn = document.querySelector('.replay'); // replace "replay-button" with the ID of your replay button
-
-replayButtn.addEventListener('click', function() {
+replayButtn.addEventListener("click", function () {
   // reset scores to zero
   scoreNumber.innerText = "0";
   pcNumber.innerText = "0";
   // reset local storage to zero
-  localStorage.setItem('userScore',0);
-  localStorage.setItem('aiScore',0);
+  localStorage.setItem("userScore", 0);
+  localStorage.setItem("aiScore", 0);
 });
-
-
 
 // isWinner: This function takes an array of two choices (user and computer) and checks if the user's choice beats the computer's choice.
 
@@ -228,14 +218,13 @@ window.addEventListener("load", () => {
 // playAgainBtn.addEventListener: This function is called when the user clicks the "play again" button and resets the game by hiding the result div and removing the winner class from the result divs.
 
 playAgainBtn.addEventListener("click", () => {
-
   gameDiv.classList.toggle("hidden");
   resultsDiv.classList.toggle("hidden");
 
   resultDivs.forEach((resultDiv) => {
     resultDiv.innerHTML = "";
     resultDiv.classList.remove("winner");
-  }); 
+  });
 
   resultText.innerText = "";
   resultWinner.classList.toggle("hidden");
@@ -313,5 +302,3 @@ function keepScore(point) {
     rulesBtn.insertAdjacentElement("afterend", nextBtn);
   }
 }
-
-
