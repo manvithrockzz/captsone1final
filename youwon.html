@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .body{
+            width: auto;
+            height: 100vh;
+            overflow-x:hidden;
+            overflow-y:hidden;
+        }
+        .rules{
+            position:absolute;
+            text-transform: uppercase;
+            text-decoration: transparent;
+            cursor: pointer;
+            right: 2%;
+            color:white ;
+            font-size: 21px;
+            bottom: 7%;
+            border: 4px solid white;         
+            border-radius: 8px;
+            border: 2rem;
+            background: none;
+            font-weight:600 ;
+        }
+        
+        body{
+            background-color: #89C15E;
+            min-height: 100vh;
+            min-height: 100vh;
+        }
+
+        #playagain{
+            position:absolute;
+            right: 45%;
+            bottom: 60px;
+            border: 2rem;
+            background: none;
+            border: 4px solid white;
+            background-color:white ;
+            font-weight:600 ;
+            font-size: 21px;
+            cursor: pointer;
+            border-radius: 8px;
+            text-transform: uppercase;
+
+        }
+
+        
+.btn-rules{
+  position:absolute;
+  right: 2%;
+  bottom: 7%;
+  border: 2rem;
+  background: none;
+  border: 4px solid white;
+  text-decoration: transparent;
+  color:white ;
+  font-weight:600 ;
+  font-size: 21px;
+  cursor: pointer;
+  border-radius: 8px;
+  text-transform: uppercase;
+}
+
+
+.model{
+  position:absolute;
+  height: 100%;
+  width: 100%;
+  top:0;
+  bottom: 0;
+  display: grid;
+  place-items: center;
+  padding-left: 0px;
+  padding-top: 200px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+
+
+}
+
+.model__container{
+  /* background: white; */
+  border-radius:0.5em;
+  margin-left: 1150px;
+  margin-top: -280px;
+}
+
+.model__header{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  /* padding: 2rem 2rem 1rem; */
+}
+
+
+.btn__close{
+  outline: none;
+  margin-left: 240px;
+  margin-bottom: -25px;
+  text-align: center;
+  margin-top: -35px;
+  background:#FF0000;
+  cursor: pointer;
+  border: 10px solid white;
+  border-radius: 50%;
+  z-index: 1;
+  box-shadow: 4px 15px 35px rgba(0, 0, 0, 0.25);
+
+
+}
+
+.rules-image{
+
+  margin-left: 2px;
+  margin-top: -39px;
+  margin-bottom: 2px;
+  padding-left: 12px;
+  padding-top: 15px;
+  text-align: center;
+  margin-right: -10px;
+  padding-right: -10px;
+  
+
+}
+
+.close-x{
+
+  color: white;
+  font-size:35px;
+  width: 40px;
+  /* height: px; */
+  line-height: 0%;
+  text-align: center;
+  cursor: pointer;
+
+}
+
+.show-model{
+  opacity: 1;
+  pointer-events: initial;
+  
+}
+
+
+
+
+        
+    </style>
+</head>
+<body>
+    <img style="margin-left:490px ;" src= "images/Screenshot 2023-03-15 014026.png" /> 
+    <button onclick="openPage()" id="playagain">Play Again</button>
+    <button class="btn-rules"> Rules</button>
+
+
+    
+    <div class="model show-model">
+        <div class="model__container">
+            <header class="model__header">
+                <!-- <h2 class="model__heading">Game Rules</h2> -->
+                <button style="cursor: pointer;" class="btn__close">
+                    <h2 style="cursor: pointer;" class="close-x">X</h2>
+                </button>
+            </header>
+            <img class="rules-image" src="images/image-rules.png">
+        </div>
+    </div>
+    
+    <script>
+      const button = document.getElementById("playagain");
+
+      function clearStorage() {
+    localStorage.removeItem("userScore");
+    localStorage.removeItem("aiScore");
+    scoreNumber.innerText = "0";
+    pcNumber.innerText = "0";
+  }
+
+  button.addEventListener("click", clearStorage);
+
+  if(button){
+  button.addEventListener("click",()=>{
+
+    location.reload();
+  });
+}
+
+
+
+
+
+
+// Add a click event listener to the button
+button.addEventListener("click", function() {
+  // Navigate to the new page
+  window.location.href ="index.html";
+
+});
+
+const btn_rules = document.querySelector(".btn-rules");
+const btn__close = document.querySelector(".btn__close");
+const model = document.querySelector(".model");
+
+btn_rules.addEventListener("click", () => {
+  model.classList.toggle("show-model");
+});
+
+btn__close.addEventListener("click", () => {
+  model.classList.toggle("show-model");
+});
+    </script> 
+</body>
+</html>

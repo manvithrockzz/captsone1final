@@ -1,0 +1,440 @@
+/* we impoted google fonts and set some default styles for all elements using universal selector */
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&display=swap");
+
+
+* {
+  /*margin and padding will be intially zero  */
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+
+body {
+  font-family: "Barlow Semi Condensed", sans-serif;
+  /* background:rgb(66, 176, 66); */
+  background-color: #89C15E;
+/* Set background color using mockup */
+  min-height: 100vh;
+  text-transform: uppercase;
+  color: white;
+  margin-left:-90px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+/* Container class is difined with some basic styling */
+.container {
+  position: relative;
+  /* max width is defined for entire container to display */
+  max-width: 700px;
+  margin: 0 auto;
+  padding-top: 2rem; 
+}
+
+
+/* This class sets up grid for displaying */
+.game {
+  position: relative;
+  place-items: center;
+  height: 30rem;
+  padding-top: 4rem;
+  display: grid;
+  /* This propety is used to position each choice in grid */
+  grid-template-columns: (repeat(2, 1fr));
+  /* before pseudo-element isused to add backgroud image */
+  grid-template-areas:
+    "paper scissors"
+    "rock rock";
+ 
+}
+
+
+.modal{
+  /* Position of this modal div is defined 
+  even here also we used grid property */
+  position:absolute;
+  height: 100%;
+  width: 100%;
+  /* Width and height defined only for make it more responsive */
+  top:0;
+  bottom: 0;
+  opacity: 0;
+  display: grid;
+  padding-left: 1330px;
+  place-items: center;
+  padding-top: 160px;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out; 
+
+}
+
+/* ::before is used to create circle behind each choice with diferent color for each choice */
+.game::before {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  left: 28%;
+  width: 100%;
+  height: 100%;
+  top: 39%;
+  background: url("./images/bg-triangle.svg") no-repeat;
+}
+
+
+
+
+.header {
+  display: flex;
+  /* we can also use grid but flex is more suitable in this situation */
+  justify-content: space-between;
+  align-items: center;
+  /* padding should be manually verified */
+  padding: 1rem 1.4rem 1rem 2rem;
+  height: 150px;
+  border: 3px solid white;
+  border-radius: 20px;
+}
+
+.logo img {
+  height: 100%;
+}
+
+.score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  line-height: 1;
+  width: 150px;
+  background: #fff;
+  height: 100%;
+}
+
+/* score title */
+.score__title {
+  font-size: 1.1rem;
+  color: black;
+  letter-spacing: 0.1em;
+
+}
+/* score of user */
+.score__number {
+  font-size: 4rem;
+  color:black;
+  font-weight: 800;
+}
+
+ /* score of pc, i.e randomly picked. */
+
+.computerscore__number{
+  
+  font-size: 04rem;
+  color:black;
+
+  font-weight: 801;
+
+
+}
+
+
+
+/* choice button */
+.choice-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+
+.choice {
+  position: relative;
+  width: 10rem;
+  height: 10rem;
+  background: #fff;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background:white;
+}
+
+/* defining properties for choice before & after */
+.choice::before,
+.choice::after {
+  content: "";
+  position: absolute;
+  left: -15%;
+  top: -15%;
+  width: 130%;
+  height: 130%;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+
+
+/* choice of rock paper scissor */
+.choice img {
+  transform: scale(1.5);
+}
+
+.choice.paper::before {
+  background:#0074B6;
+}
+/* giving bg color to each choice with defined transform scale */
+.choice.scissors::before {
+  background:#BD00FF;
+}
+.choice.rock::before {
+  background: #f28c11;
+}
+
+
+.choice::after {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+
+.choice-btn[data-choice="paper"] {
+  grid-area: paper;
+}
+
+.close-x{
+
+  color: white;
+  font-size:35px;
+  width: 50px;
+  height: 50px;
+  line-height:1.5;
+  cursor: pointer;
+
+}
+
+
+.choice-btn[data-choice="scissors"] {
+  grid-area: scissors;
+}
+
+
+/* after choice is picked, the reuslts are */
+.results {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  place-items: center;
+  grid-template-areas:
+    "you-title ai-title"
+    "you-picked ai-picked";
+ 
+}
+
+
+.choice-btn[data-choice="rock"] {
+  grid-area: rock;
+}
+
+
+.results__heading {
+  font-size: 1.5rem;
+  letter-spacing: 0.1em;
+  padding: 4rem 0 8rem;
+}
+.results__result {
+  background:#7dbd4c;
+  min-width: 10rem;
+  z-index: -1;
+  min-height: 10rem;
+  /* background:rgb(71, 223, 71); */
+  border-radius: 50%;
+  transform: scale(1.4);
+}
+
+.results__heading:first-of-type {
+  grid-area: you-title;
+}
+/* dividing and putting values into grid */
+
+.results__heading:last-of-type {
+  grid-area: ai-title;
+}
+
+/* every row had first-of-type */
+
+.results__result:first-of-type {
+  grid-area: you-picked;
+}
+
+/* and last of type */
+
+.results__result:last-of-type {
+  grid-area: ai-picked;
+}
+
+
+
+
+.results__winner {
+  grid-area: result-winner;
+  display: grid;
+  place-items: center;
+}
+.results__text {
+  font-size: 3.5rem;
+  padding-bottom: 1.5rem;
+}
+
+
+
+.rules-btn {
+  position: absolute;
+  /* To inherit both font and text propeties */
+  font-family: inherit;
+  text-transform: inherit; 
+  cursor: pointer;
+  font-size: 1.3rem;
+  letter-spacing: 0.1em;
+  bottom: 1rem;
+  right: 2rem;
+  background: none;
+  outline: none;
+  border: 4px solid white;
+  border-radius: 0.6rem;
+  color: white;
+  padding: 0.6rem 1rem;
+ 
+}
+.rules-btn:focus {
+  border: 2px solid #fff;
+}
+
+
+ 
+
+.close-btn {
+  position: relative;  
+  margin-top:-25px;
+  background:#FF0000;
+  cursor: pointer;
+  top:-40px;
+  left: 40px;
+  outline: none;
+  margin-left: 22px;
+  margin-bottom: -20px;
+  border: 10px solid white;
+  border-radius: 50%;
+  z-index: 2;
+  align-items: flex-end;
+  box-shadow: 4px 15px 35px rgba(0, 0, 0, 0.25);
+
+}
+
+.modal__container {
+  /* border-radius can varied  */
+  background: #fff;
+  border-radius: 0.5rem;
+}
+.modal__header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 2rem 2rem 1rem;
+}
+.modal__heading {
+  font-size: 1.5rem;
+}
+
+
+.rules-img {
+  padding: 2rem 4rem;
+}
+
+
+
+em{
+  font-style: normal;
+  font-size: 25px;
+}
+
+
+.rules-image{
+  align-items: center;
+  position: relative;
+  margin-top: -73px;
+}
+
+
+
+.show-modal {
+  /* opacity is can be o & 1 based on requrirement */
+  opacity: 1;
+  pointer-events: initial;
+}
+
+
+.hidden {
+  /* This class in called when divs are requried to be display none */
+  display: none;
+}
+
+.hiddens{
+  display: none;
+  position: relative;
+  top: 270px;
+}
+
+.replay{
+  
+  background: #fff;
+  outline: none;
+  /* Play-again button which resets all functionalites and rest to choose again */
+  border: 2px solid transparent;
+  border-radius: 0.6rem;
+  padding: 0.6rem 3.5rem;
+  font-family: inherit;
+  text-transform: inherit;
+  font-size: 1.3rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+}
+
+.play-again {
+  background: #fff;
+  outline: none;
+  /* Play-again button which resets all functionalites and rest to choose again */
+  border: 2px solid transparent;
+  border-radius: 0.6rem;
+  padding: 0.6rem 3.5rem;
+  font-family: inherit;
+  text-transform: inherit;
+  font-size: 1.3rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+}
+
+.results.show-winner{
+
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas: "you-title . ai-title"
+  "you-picked result-winner ai-picked";
+}
+
+
+.winner .choice::after {
+  opacity: 1;
+  /* box-shadow: 0 0 0 40px #3b6720, 0 0 0 80px #1da82b, 0 0 0 130px #3b6720; */
+  box-shadow: 0 0 0 40px rgba(46, 154, 37, 0.5),
+            0 0 0 80px rgba(46, 154, 37, 0.3),
+            0 0 0 120px rgba(46, 154, 37, 0.1);
+
+
+  animation: winner 1s ease forwards;
+  opacity: 1;
+
+}
+
+
